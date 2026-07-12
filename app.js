@@ -18,8 +18,9 @@ function addHabit(e) {
     };
 
     habits.push(habit);
-    listHabits();
+    listHabits(habits, habitsList);
     this.reset();
+    console.log(habit);
 }
 
 function listHabits(){
@@ -27,10 +28,31 @@ function listHabits(){
         return `
             <li>
                 <input type="checkbox" data-index="${i}" id="habit${i}" ${habit.completed ? "checked" : ""} />  
-                <label for="habit${i}">${habit.reps}/${habit.totalCounts} ${habit.timeframe}<span>${habit.text}</span></label>
+                <label for="habit${i}"><span>${habit.reps}/${habit.totalCounts} ${habit.timeframe}<span>${habit.text}</span></label>
             </li>
         `
     }).join("");
 }
 
+function toggleComplete(e) {
+    console.log(e.target)
+
+    if(!e.target.matches("input")) return;
+    const el = e.target;
+    const index = e.target;
+    const index = el.dataset.index;
+    habits[index].reps += 1;
+    if(habits[index].reps === habits[index].totalCounts) {
+        habits[index].completed = true;
+    } else if(habits[index].reps > habits[index].totalCounts){
+        habits[index].reps=0;
+        habits[index].completed = false;
+    }
+}
+
+
+
 addHabits.addEventListener("submit", addHabit);
+habitsList.addEventListener("click", toggleCompleted);
+
+listHabits(habits, habitsList());
