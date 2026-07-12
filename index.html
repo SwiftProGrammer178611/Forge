@@ -24,15 +24,20 @@
                 min="1"
                 required
             />
+            <div class="frequency">
+                <label for="timeframe">Frequency: </label>
+                <select name="timeframe" id="timeframe">
+                    <option value="Daily">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Monthly">Monthly</option>
+                    <option value="Yearly">Yearly</option>
+                </select>
+            </div>
+            <input type="submit" value="+ Add Habit" />
         </form>
+        <ul class="habits">
+            <li>Loading ...</li>
+        </ul>
     </div>
 </body>
 </html>
-
-
-
-git add .  
-git commit -m "Initial Coreflux commit"
-git branch -M main
-git remote add origin https://github.com/SwiftProGrammer178611/Forge.git   
-git push -u origin main
