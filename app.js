@@ -1,6 +1,9 @@
 const addHabits = document.querySelector(".add-habit");
 const habitsList = document.querySelector(".habits");
-const habits = [];
+
+//the || is a safeguard so we can still add habits even after localStorage is cleared
+//Just in case ykykyk
+const habits = JSON.parse(localStorage.getItem("habits")) || [];
 
 function addHabit(e) {
     e.preventDefault();
@@ -19,6 +22,7 @@ function addHabit(e) {
 
     habits.push(habit);
     listHabits(habits, habitsList);
+    localStorage.setItem("habits", JSON.stringify(habits));
     this.reset();
     console.log(habit);
 }
@@ -28,19 +32,20 @@ function listHabits(){
         return `
             <li>
                 <input type="checkbox" data-index="${i}" id="habit${i}" ${habit.completed ? "checked" : ""} />  
-                <label for="habit${i}"><span>${habit.reps}/${habit.totalCounts} ${habit.timeframe}<span>${habit.text}</span></label>
+                <label for="habit${i}"><span>${habit.reps}/${habit.totalCounts} ${habit.timeframe}</span><span>${habit.text}</span></label>
+                <button class="delete" data-index=${i} id="delete${i}"> Delete</button>
             </li>
         `
     }).join("");
 }
 
-function toggleComplete(e) {
+function toggleCompleted(e) {
     console.log(e.target)
 
     if(!e.target.matches("input")) return;
     const el = e.target;
-    const index = e.target;
     const index = el.dataset.index;
+
     habits[index].reps += 1;
     if(habits[index].reps === habits[index].totalCounts) {
         habits[index].completed = true;
@@ -48,11 +53,22 @@ function toggleComplete(e) {
         habits[index].reps=0;
         habits[index].completed = false;
     }
+
+    listHabits(habits, habitsList);
+    localStorage.setItem("habits", JSON.stringify(habits));
 }
 
-
+function deleteHabit(e){
+    if(!e.target.matches("button")) return;
+    const el = e.target;
+    const index = el.dataset.index;
+    habits.splice(index, 1);
+    listHabits(habits, habitsList);
+    localStorage.setItem("habits", JSON.stringify(habits));
+}
 
 addHabits.addEventListener("submit", addHabit);
 habitsList.addEventListener("click", toggleCompleted);
+habitsList.addEventListener("click", deleteHabit);
 
-listHabits(habits, habitsList());
+listHabits(habits, habitsList);
