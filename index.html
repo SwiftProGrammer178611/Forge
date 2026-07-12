@@ -9,26 +9,30 @@
     <title>Forge</title>
 </head>
 <body>
-    <div class="">
-        <h2 class="font-bold">FORGERY</h2>
+    <div class="min-h-screen flex items-center justify-center bg-orange-400 shadow-lg rounded p-8 ">
+        
+        <div class="flex flex-col items-center text-center shadow-lg rounded p-8 max-w-sm rounded-lg w-full bg-red-300">
+            
+            <h2 class="font-bold text-xl mb-4">FORGERY</h2>
         <p></p>
-        <form class="add-habit">
+        <form class="add-habit flex flex-col items-center gap-2 w-full">
             <input
-                class="habit"
+                class="habit border rounded p-2 w-full"
                 type="text"
-                name="habit"
+                name="habit"    
                 placeholder="Enter Habit Name"
                 required
             />
             <input 
+                class="border- rounded p-2 w-full "
                 type="number"
                 name="reps"
                 placeholder="# of Forgers"
                 min="1"
                 required
             />
-            <div class="frequency">
-                <label for="timeframe">Frequency: </label>
+            <div class="frequency pb-4 ">
+                <label for="timeframe" class="font-bold">Frequency: </label>
                 <select name="timeframe" id="timeframe">
                     <option value="Daily">Daily</option>
                     <option value="Weekly">Weekly</option>
@@ -36,11 +40,13 @@
                     <option value="Yearly">Yearly</option>
                 </select>
             </div>
-            <input type="submit" value="+ Add Habit" />
+            <input type="submit" value="+ Add Habit" class="bg-black text-white rounded px-4 py-2"/>
         </form>
-        <ul class="habits">
+        <ul class="habits w-full p-6">
             <li>Loading ...</li>
         </ul>
+        </div>
+        
     </div>
     <script src="app.js"></script>
 </body>

@@ -30,10 +30,10 @@ function addHabit(e) {
 function listHabits(){
     habitsList.innerHTML = habits.map((habit,i) => {
         return `
-            <li>
-                <input type="checkbox" data-index="${i}" id="habit${i}" ${habit.completed ? "checked" : ""} />  
-                <label for="habit${i}"><span>${habit.reps}/${habit.totalCounts} ${habit.timeframe}</span><span>${habit.text}</span></label>
-                <button class="delete" data-index=${i} id="delete${i}"> Delete</button>
+            <li class="pb-4">
+                <input class="" type="checkbox" data-index="${i}" id="habit${i}" ${habit.completed ? "checked" : ""} />  
+                <label class="text-xl pr-8 pl-4 " for="habit${i}"><span>${habit.reps}/${habit.totalCounts} ${habit.timeframe}</span><span>${habit.text}</span></label>
+                <button class="delete bg-red-500 p-2 rounded-xl " data-index=${i} id="delete${i}"> Delete</button>
             </li>
         `
     }).join("");
