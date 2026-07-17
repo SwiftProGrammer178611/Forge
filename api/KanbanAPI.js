@@ -8,6 +8,7 @@ export default class {
     }
     static insertItem(columnId, content){
         const data = read();
+        const column = data.find(column => column.id == columnId);
         const item = {
             id:Math.floor(Math.random() * 100000),
             content
@@ -34,9 +35,9 @@ export default class {
             throw new Error("Item not found");
         }
         item.content = newProps.content === undefined ? item.content : newProps.content;
-        if (newProps.columnId !== undefined) && newProps.position !== undefined) {
-            const targetColumn = data.find(column => column.id = newProps.columnId);
-            console.log(targetCOlumn)
+        if (newProps.columnId !== undefined && newProps.position !== undefined) {
+            const targetColumn = data.find(column => column.id == newProps.columnId);
+            console.log(targetColumn);
             if (!targetColumn) {
                 throw new Error("Target Column not found.");
             }
@@ -49,12 +50,11 @@ export default class {
         const data = read();
         for (const column of data) {
             const item = column.items.find(item => item.id == itemId);
-            if (!item) {
-                column.items.splice(column.itmes.indexOf(item), 1);
+            if (item) {
+                column.items.splice(column.items.indexOf(item), 1);
             }
         }
         save(data);
-    }
 
 function read() {
     const json = localStorage.getItem("kanban-data");
@@ -63,7 +63,7 @@ function read() {
             { id: 1, items: [] }, { id: 2, items: [] }, { id: 3, items: [] }
         ];
     }
-    return JSON.parse(data); 
+    return JSON.parse(json); 
 }
 
 function save(data) {
