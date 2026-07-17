@@ -21,10 +21,7 @@ export default class Kanban{
                 id:2,
                 title:"Started"
             },
-            {
-                id:3,
-                title:"Busy Bee"
-            } 
+            {id:3,title:"Busy Bee"} 
         ];
     }
 }

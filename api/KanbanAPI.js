@@ -30,6 +30,7 @@ export default class {
                     return[item, column];
                 }
             }
+            return[null,null]
             })();
         if (!item) {
             throw new Error("Item not found");
@@ -55,6 +56,8 @@ export default class {
             }
         }
         save(data);
+    }
+}
 
 function read() {
     const json = localStorage.getItem("kanban-data");

@@ -2,12 +2,11 @@ const addHabits = document.querySelector(".add-habit");
 const habitsList = document.querySelector(".habits");
 
 //the || is a safeguard so we can still add habits even after localStorage is cleared
-//Just in case ykykyk
+//Just in case
 const habits = JSON.parse(localStorage.getItem("habits")) || [];
 
 function addHabit(e) {
     e.preventDefault();
-
     const text = this.querySelector('[name="habit"]').value;
     console.log(text);
     const totalCounts = this.querySelector('[name="reps"]').value;
@@ -19,16 +18,14 @@ function addHabit(e) {
         timeframe: timeframe,
         completed: false,
     };
-
     habits.push(habit);
     listHabits(habits, habitsList);
     localStorage.setItem("habits", JSON.stringify(habits));
     this.reset();
     console.log(habit);
 }
-
-function listHabits(){
-    habitsList.innerHTML = habits.map((habit,i) => {
+function listHabits() {
+    habitsList.innerHTML = habits.map((habit, i) => {
         return `
             <li class="pb-4">
                 <input class="" type="checkbox" data-index="${i}" id="habit${i}" ${habit.completed ? "checked" : ""} />  
@@ -38,35 +35,29 @@ function listHabits(){
         `
     }).join("");
 }
-
 function toggleCompleted(e) {
     console.log(e.target)
-
-    if(!e.target.matches("input")) return;
+    if (!e.target.matches("input")) return;
     const el = e.target;
     const index = el.dataset.index;
-
     habits[index].reps += 1;
-    if(habits[index].reps === habits[index].totalCounts) {
+    if (habits[index].reps === habits[index].totalCounts) {
         habits[index].completed = true;
-    } else if(habits[index].reps > habits[index].totalCounts){
-        habits[index].reps=0;
+    } else if (habits[index].reps > habits[index].totalCounts) {
+        habits[index].reps = 0;
         habits[index].completed = false;
     }
-
     listHabits(habits, habitsList);
     localStorage.setItem("habits", JSON.stringify(habits));
 }
-
-function deleteHabit(e){
-    if(!e.target.matches("button")) return;
+function deleteHabit(e) {
+    if (!e.target.matches("button")) return;
     const el = e.target;
     const index = el.dataset.index;
     habits.splice(index, 1);
     listHabits(habits, habitsList);
     localStorage.setItem("habits", JSON.stringify(habits));
 }
-
 addHabits.addEventListener("submit", addHabit);
 habitsList.addEventListener("click", toggleCompleted);
 habitsList.addEventListener("click", deleteHabit);
