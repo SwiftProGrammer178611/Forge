@@ -9,13 +9,15 @@ new Kanban(
     const workDurationInput = document.getElementById('work-duration');
     const restDurationInput = document.getElementById('rest-duration');
     const timerTime = document.getElementById('feh-timer-time');
-    const circleProgress = document.getElementById('circle-progress');
+    const circleProgress = document.getElementById('.circle-progress');
     let workDuration = parseInt(workDurationInput.value) * 60;
     let restDuration = parseInt(restDurationInput.value) * 60;
     let remainingTime = workDuration;
     let isPaused = true;
     let isWorking = true;
     let intervalId;
+    const completedSessiosEl = document.getElementById('feh-completed-sessions');
+    let completedSessions = 0;
 
     window.addEventListener('load', () => {
         fehBody.classList.add('page-loaded');
@@ -40,7 +42,54 @@ new Kanban(
         }
     });
 
+    const pauseBtn = document.getElementById('pause-btn');
+    startBtn.addEventListener('click', () => {
+        isPaused = true;
+
+        fehBody.classList.remove('timer-running');
+        fehBody.classList.add('timer-paused');
+    });
+
+    const btnToggleSettings = document.getElementById('feh-toggle-settings');
+    const btnCloseSettings = document.getElementById('feh-close-settings');
+
+    function setBodySettings() {
+        fehBody.classList.contains('settings-active') ? fehBody.classList.remove('settings-active') : fehBody.classList.add('settings-active');
+    }
+
+    function toggleSettings() {
+        if(event.type === 'click'){
+            setBodySettings();
+        } else if(event.type === 'keydown' && event.keyCode === 27){
+            fehBody.classList.remove('settings-active');
+        }
+    }
+
+    btnToggleSettings.addEventListener('click', toggleSettings);
+    btnCloseSettings.addEventListener('click', toggleSettings);
+    document.addEventListener('keydown', toggleSettings);
+
+    workDurationInput.addEventListener('change', ()=>{
+        workDuration = parseint(workDurationInput.value) * 60;
+        if(isWorking) {
+            remainingTime = workDuration;
+            updateProgress();
+        }
+    });
+    restDurationInput.addEventListener('change',()=>{
+        restDuration = parseInt(restDurationInput.value) * 60;
+        if(isWorking){
+            remainingTime = workDuration;
+            updateProgress();
+        }
+    })
+
     function updateTimer() {
+
+        let playAlarm;
+        const workFinished = new Audio("/music/success-fanfare-trumpets-6185.mp3");
+        const restFinished = new Audio("/music/error-when-entering-the-game-menu-132111.mp3"); 
+
         if(!isPaused){
             remainingTime--;
 
@@ -51,15 +100,21 @@ new Kanban(
                 if(!isWorking){
                     fehBody.classList.add('rest-mode');
                     fehBody.classList.remove('timer-running');
+                    completedSessions++;
+                    completedSessiosEl.textContent = completedSessions
                 }
                 else{
                     fehBody.classList.remove('rest-mode');
                     fehBody.classList.remove("timer-running")
                 }
 
+                playAlarm = isWorking ? restFinished : workFinished;
+                playAlarm.play();
+
                 isPaused=false;
                 fehBody.classList.remove('timer-work-active');
             }
+            document.title = timerTime.textContent = formatTime(remainingTime);
 
             updateProgress();
         }

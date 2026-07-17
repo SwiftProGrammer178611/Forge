@@ -1,0 +1,26 @@
+
+.wrapper{
+    position:relative;
+    width:100%;
+    max-width: 1100px;
+    margin:0 auto;
+    padding:0 15px;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    display:flex;
+    align-items:center;
+    height:100%;
+    
+}
+
+#vista-bg{
+    background-image: url('lambo.png');
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position:absolute;
+}
