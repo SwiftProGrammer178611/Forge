@@ -9,49 +9,59 @@ function addHabit(e) {
     e.preventDefault();
     const text = this.querySelector('[name="habit"]').value;
     console.log(text);
-    const totalCounts = this.querySelector('[name="reps"]').value;
-    const timeframe = this.querySelector('[name="timeframe"]').value;
     const habit = {
         text: text,
-        reps: 0,
-        totalCounts: totalCounts,
-        timeframe: timeframe,
-        completed: false,
-    };
+        streak: 0,
+        lastDate: "",
+    }
     habits.push(habit);
     listHabits(habits, habitsList);
     localStorage.setItem("habits", JSON.stringify(habits));
     this.reset();
     console.log(habit);
 }
+
+const colorOps = ["bg-yellow-200", "bg-pink-200", "bg-green-200", "bg-blue-200"];
+
 function listHabits() {
     habitsList.innerHTML = habits.map((habit, i) => {
         return `
-            <li class="pb-4">
-                <input class="" type="checkbox" data-index="${i}" id="habit${i}" ${habit.completed ? "checked" : ""} />  
-                <label class="text-xl pr-8 pl-4 " for="habit${i}"><span>${habit.reps}/${habit.totalCounts} ${habit.timeframe}</span><span>${habit.text}</span></label>
-                <button class="delete bg-red-500 p-2 rounded-xl " data-index=${i} id="delete${i}"> Delete</button>
+            <li class="${colorOps[i % colorOps.length]} rounded shadow p-4">
+                <p class="font-bold mb-2">${habit.text}</p>
+                <p class="mb-2">🔥 Streak: ${habit.streak}</p>
+                <button class="streak-btn bg-red-900 text-white px-2 py-1 rounded mr-2" data-index="${i}">+1 Today</button>
+                <button class="delete bg-red-500 text-white px-2 py-1 rounded" data-index="${i}">Delete</button>
             </li>
-        `
+                `
     }).join("");
 }
-function toggleCompleted(e) {
-    console.log(e.target)
-    if (!e.target.matches("input")) return;
-    const el = e.target;
-    const index = el.dataset.index;
-    habits[index].reps += 1;
-    if (habits[index].reps === habits[index].totalCounts) {
-        habits[index].completed = true;
-    } else if (habits[index].reps > habits[index].totalCounts) {
-        habits[index].reps = 0;
-        habits[index].completed = false;
+
+function checkStreak(e){
+    if(!e.target.matches(".streak-btn")) return;
+    const index = e.target.dataset.index;
+    const habit = habits[index];
+
+    const today = new Date().toDateString();
+    //if checked -> then nothing
+    if(habit.lastDate === today) return;
+
+    let yesterday = new Date();
+    yesterday.setDate(yesterday.getDate()-1);
+    yesterday = yesterday.toDateString();
+
+    if(habit.lastDate === yesterday){
+        habit.streak = habit.streak+1;
+    }else{
+        habit.streak = 1;
     }
-    listHabits(habits, habitsList);
+
+    habit.lastDate = today;
+
+    listHabits();
     localStorage.setItem("habits", JSON.stringify(habits));
 }
 function deleteHabit(e) {
-    if (!e.target.matches("button")) return;
+    if(!e.target.matches(".delete")) return;
     const el = e.target;
     const index = el.dataset.index;
     habits.splice(index, 1);
@@ -59,7 +69,7 @@ function deleteHabit(e) {
     localStorage.setItem("habits", JSON.stringify(habits));
 }
 addHabits.addEventListener("submit", addHabit);
-habitsList.addEventListener("click", toggleCompleted);
+habitsList.addEventListener("click", checkStreak);
 habitsList.addEventListener("click", deleteHabit);
 
 listHabits(habits, habitsList);

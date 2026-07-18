@@ -5,18 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</head>
+    <meta name="color-scheme" content="light">
+
 <title>Forge</title>
-<link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
-    <div class="border-b border-default">
-        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-body">
+    <!--going to be adding a sticky note format that was suggested and counter, edit and delete to each with localstorage saving and also streaking-->
+    <div class="p-32 bg-sky-900 min-h-screen text-white font-bold font-mono text-xl">
+        <div class="border-b border-default">
+        <ul class="flex flex-wrap -mb-px text-xl font-medium text-center text-body">
             <li class="me-2">
                 <a href="/kanban.html"
-                    class="inline-flex items-cetner justify-cetner p-4 border-b border-transpatent rounded-t-base hover:text-fg-brand hover:border-brand group">
+                    class="inline-flex items-cetner justify-center p-4 border-b border-transparent rounded-t-base hover:text-fg-brand hover:border-brand group">
                     <!-- <svg class="w-4 h-4 me-2 text-bdoy group-hover:text-fg-brand" aria-hidden="true" xmlns="https://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" strok-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/> </svg> -->
                     Kanban Board
                 </a>
@@ -51,28 +53,19 @@
             </li>
         </ul>
     </div>
-    <div class="flex flex-col items-center text-center shadow-lg rounded p-8 max-w-sm rounded-lg w-full bg-red-300">
-        <h2 class="font-bold text-xl mb-4">FORGERY</h2>
+    
+
+    <div class="flex flex-col items-center text-center shadow-lg rounded-lg p-8 min-h-screen w-full bg-amber-300 mx-auto mt-10">
+        <h2 class="font-bold text-xl mb-4">Momentus</h2>
 
         <form class="add-habit flex flex-col items-center gap-2 w-full">
-            <input class="habit border rounded p-2 w-full" type="text" name="habit" placeholder="Enter Habit Name"
-                required />
-            <input class="border- rounded p-2 w-full " type="number" name="reps" placeholder="# of Hours" min="1"
-                required />
-            <div class="frequency pb-4 ">
-                <label for="timeframe" class="font-bold">Frequency: </label>
-                <select name="timeframe" id="timeframe">
-                    <option value="Daily">Daily</option>
-                    <option value="Weekly">Weekly</option>
-                    <option value="Monthly">Monthly</option>
-                    <option value="Yearly">Yearly</option>
-                </select>
-            </div>
+            <input class="habit border rounded- p-2 w-full" type="text" name="habit" placeholder="Enter Habit Name" required>
             <input type="submit" value="+ Add Habit" class="bg-black text-white rounded px-4 py-2" />
         </form>
-        <ul class="habits w-full p-6">
+        <ul class="habits grid grid-cols-2 sm:grid-cols-3 gap-4 w-full p-6">
             <li>Loading ...</li>
         </ul>
+    </div>
     </div>
     <script src="main.js" type="module"></script>
     <script src="app.js" type="module"></script>

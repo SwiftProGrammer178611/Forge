@@ -10,11 +10,12 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="border-b border-default">
-        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-body">
+    <div class="p-32 bg-sky-900 min-h-screen text-white font-bold font-mono text-xl">
+        <div class="border-b border-default">
+        <ul class="flex flex-wrap -mb-px text-xl font-medium text-center text-body">
             <li class="me-2">
                 <a href="/kanban.html"
-                    class="inline-flex items-cetner justify-cetner p-4 border-b border-transpatent rounded-t-base hover:text-fg-brand hover:border-brand group">
+                    class="inline-flex items-cetner justify-center p-4 border-b border-transparent rounded-t-base hover:text-fg-brand hover:border-brand group">
                     <!-- <svg class="w-4 h-4 me-2 text-bdoy group-hover:text-fg-brand" aria-hidden="true" xmlns="https://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" strok-linejoin="round" stroke-width="2" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/> </svg> -->
                     Kanban Board
                 </a>
@@ -49,6 +50,7 @@
             </li>
         </ul>
     </div>
+    
     <div class="kanban">
         <div class="kanban__column">
             <div class="kanban__column-title">Not started</div>
@@ -58,6 +60,7 @@
             </div>
             <button class="kanban__add-item" type="button">+ Add</button>
         </div>
+    </div>
     </div>
     <script src="main.js" type="module"></script>
     <script src="app.js" type="module"></script>
