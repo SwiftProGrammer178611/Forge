@@ -13,13 +13,14 @@ body {
 }
 
 #vista-bg {
-    background-image: url('lambo.png');
+    background-image: url('lambo2.png');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     transition: all 0.6s ease-in-out;
+    
 }
 
 body.rest-mode #vista-bg{
@@ -33,11 +34,11 @@ body.timer-running .circle-progress{
 }
 
 #feh-pomodoro {
-    border: 1px solid rgb(89, 0, 255);
+    border: 1px solid rgb(57, 86, 255);
     position: relative;
     width: 100%;
     max-width: 350px;
-    margin: 0 auto;
+    margin: 6% auto 0;
     padding: 55px 25px 25px 25px;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.29);
@@ -110,7 +111,7 @@ body.page-loaded #feh-pomodoro-overlay {
 }
 
 .circle-progress {
-    stroke: rgb(158, 83, 83);
+    stroke: rgb(83, 97, 158);
     stroke-width: 7;
     stroke-linecap: round;
     stroke-dasharray: 283;
@@ -207,7 +208,7 @@ body.settings-active #feh-timer-buttons{
     bottom: 0;
     left: 0;
     width: 100%;
-    background: orangered;
+    background: rgb(64, 110, 215);
     padding: 20px;
     z-index: 1;
 }
@@ -250,7 +251,7 @@ body.settings-active #feh-timer-buttons{
 }
 
 #feh-timer-buttons button {
-    background-color: red;
+    background-color: rgb(62, 74, 204);
     position: absolute;
     border: 0px none;
     cursor: pointer;

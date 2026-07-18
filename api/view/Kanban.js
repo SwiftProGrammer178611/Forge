@@ -15,13 +15,13 @@ export default class Kanban{
         return[
             {
                 id:1,
-                title:"Not started"
+                title:"To DO:"
             },
             {
                 id:2,
-                title:"Started"
+                title:"In Progress"
             },
-            {id:3,title:"Busy Bee"} 
+            {id:3,title:"Done"}
         ];
     }
 }

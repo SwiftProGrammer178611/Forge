@@ -21,15 +21,15 @@ function addHabit(e) {
     console.log(habit);
 }
 
-const colorOps = ["bg-yellow-200", "bg-pink-200", "bg-green-200", "bg-blue-200"];
+const colorOps = ["bg-amber-300", "bg-pink-300", "bg-green-300", "bg-blue-300", "bg-indigo-300"];
 
 function listHabits() {
     habitsList.innerHTML = habits.map((habit, i) => {
         return `
             <li class="${colorOps[i % colorOps.length]} rounded shadow p-4">
-                <p class="font-bold mb-2">${habit.text}</p>
-                <p class="mb-2">🔥 Streak: ${habit.streak}</p>
-                <button class="streak-btn bg-red-900 text-white px-2 py-1 rounded mr-2" data-index="${i}">+1 Today</button>
+                <p class="font-bold mb-2 text-mist-800">${habit.text}</p>
+                <p class="mb-2 text-mist-800">🔥 Streak: ${habit.streak}</p>
+                <button class="streak-btn bg-green-900 text-white px-2 py-1 rounded mr-2" data-index="${i}">+1 Today</button>
                 <button class="delete bg-red-500 text-white px-2 py-1 rounded" data-index="${i}">Delete</button>
             </li>
                 `
