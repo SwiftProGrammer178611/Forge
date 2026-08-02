@@ -1,5 +1,5 @@
-import Kanban from "../../Kanban.js";
-import KanbanAPI from "../KanbanAPI.js";
+import Kanban from "./Kanban.js";
+import KanbanAPI from "./api/KanbanAPI.js";
 import DropZone from "./DropZone.js";
 export default class Item {
     constructor(id, content) {
