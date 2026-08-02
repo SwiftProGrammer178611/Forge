@@ -1,6 +1,6 @@
 import Kanban from "./Kanban.js";
-import DropZone from "./api/view/DropZone.js";
-import KanbanAPI from "./api/KanbanAPI.js";
+import DropZone from "./DropZone.js";
+import KanbanAPI from "./KanbanAPI.js";
 import Item from "./Item.js";
 
 export default class Column {
